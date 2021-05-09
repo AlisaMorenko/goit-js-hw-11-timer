@@ -1,9 +1,8 @@
 const refs = {
-  // clockface: document.querySelector("#timer-1"),
-  dd: document.querySelector('span[data-value="days"]'),
-  hh: document.querySelector('span[data-value="hours"]'),
-  mm: document.querySelector('span[data-value="mins"]'),
-  ss: document.querySelector('span[data-value="secs"]'),
+  dd: document.querySelector('[data-value="days"]'),
+  hh: document.querySelector('[data-value="hours"]'),
+  mm: document.querySelector('[data-value="mins"]'),
+  ss: document.querySelector('[data-value="secs"]'),
 };
 
 class CountdownTimer {
