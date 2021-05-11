@@ -1,15 +1,11 @@
-const refs = {
-  dd: document.querySelector('[data-value="days"]'),
-  hh: document.querySelector('[data-value="hours"]'),
-  mm: document.querySelector('[data-value="mins"]'),
-  ss: document.querySelector('[data-value="secs"]'),
-};
-
 class CountdownTimer {
-  constructor({ selector, targetDate, changeInterface }) {
-    this.selector = selector;
+  constructor({ selector, targetDate }) {
+    // this.selector = selector;
     this.targetDate = targetDate;
-    this.changeInterface = changeInterface;
+    this.dd = document.querySelector(`${selector} [data-value="days"]`);
+    this.hh = document.querySelector(`${selector} [data-value="hours"]`);
+    this.mm = document.querySelector(`${selector} [data-value="mins"]`);
+    this.ss = document.querySelector(`${selector} [data-value="secs"]`);
   }
 
   start() {
@@ -17,7 +13,7 @@ class CountdownTimer {
       const currentTime = Date.now();
       const deltaTime = this.targetDate - currentTime;
       const time = this.getTimeComponents(deltaTime);
-      this.changeInterface(time);
+      this.updateClockFace(time);
     }, 1000);
   }
 
@@ -35,19 +31,18 @@ class CountdownTimer {
 
     return { days, hours, mins, secs };
   }
-}
 
-function updateClockFace({ days, hours, mins, secs }) {
-  refs.dd.textContent = `${days}`;
-  refs.hh.textContent = `${hours}`;
-  refs.mm.textContent = `${mins}`;
-  refs.ss.textContent = `${secs}`;
+  updateClockFace({ days, hours, mins, secs }) {
+    this.dd.textContent = `${days}`;
+    this.hh.textContent = `${hours}`;
+    this.mm.textContent = `${mins}`;
+    this.ss.textContent = `${secs}`;
+  }
 }
 
 const timer = new CountdownTimer({
   selector: "#timer-1",
   targetDate: new Date("Jul 17, 2022"),
-  changeInterface: updateClockFace,
 });
 
 timer.start();
